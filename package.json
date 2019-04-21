@@ -1,0 +1,33 @@
+{
+  "name": "Duffle-Blog-News-Scraper",
+  "version": "1.0.0",
+  "description": "The site uses cheerio to scrape news and then store the data in mongoDb. Users can save, leave notes, and delete articles based on their preference.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marvtron/Duffle-Blog-News-Scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marvtron/Duffle-Blog-News-Scraper/issues"
+  },
+  "homepage": "https://github.com/marvtron/Duffle-Blog-News-Scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.5.2",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0"
+  }
+}
