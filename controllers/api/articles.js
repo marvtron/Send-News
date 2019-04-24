@@ -87,9 +87,9 @@ router.get('/scrape', function(req, res, next) {
     request('https://www.duffelblog.com/marine-corps/', function(error, response, html) {
         let $ = cheerio.load(html);
         let results = [];
-        $('').each(function(i, e) {
-            let title = $(this).children('').text(),
-                link = $(this).children('').attr('href'),
+        $('h2').each(function(i, e) {
+            let title = $(this).children('p').text(),
+                link = $(this).children('a').attr('href'),
                 single = {};
         if(link !== undefined && link.includes('http') && title !== '') {
             single = {

@@ -37,7 +37,7 @@ router.get('/saved', function(req, res) {
         .find({})
         .where('saved').equals(true)
         .where('deleted').equals(false)
-        .populate(notes)
+        .populate('notes')
         .sort('-date')
         .exec(function(error, articles) {
             if (error) {
@@ -50,6 +50,7 @@ router.get('/saved', function(req, res) {
                     subtitle: 'Here are your saved articles!',
                     articles: articles
                 };
+                res.render('views/partials/navs/saved', hbsObj);
             }
         });
 });

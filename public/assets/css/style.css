@@ -1,0 +1,70 @@
+html, body {
+    min-height: 100%;
+}
+h3 {
+    text-align: center ;
+}
+body {
+    padding: 70px;
+    background-image: linear-gradient(#fdfcfb, #e2d1c3);
+}
+
+#navbar {
+    background-color:#fdfcfb;
+    border-bottom: 1.5px solid #3A3A38;
+}
+
+.btn, a.btn, #btn, #apiBtn {
+    background-color: #e7e7e7;
+    border-color: #3a3a38;
+    color: #3A3A38;
+}
+
+.jumbotron {
+    margin: 20px;
+    background-color:#e2d1c3;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: #3A3A38;
+}
+
+#scrapeBtn {
+    text-align: right;
+    float: right;
+}
+
+#db {
+    color: darkblue;
+}
+
+#copyright {
+    float: left;
+}
+
+.well {
+    background-color: #e4dcf1;
+    border-color:#3A3A38;
+}
+
+.container {
+    color: #3A3A38;
+    border-width: 3px;
+    border-style: solid;
+    border-image: 
+      linear-gradient(#fdfcfb, #e2d1c3); 
+        
+}
+
+#socialLinks {
+    float: left;
+}
+
+#text {
+    background-color: #f9f9f9;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+a:hover, a:visited, a:link, #scrapeBtn, a { color: #000;}
