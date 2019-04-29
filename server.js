@@ -8,7 +8,8 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       logger = require('morgan'),
       mongoose = require('mongoose'),
-      methodOverride = require('method-override');
+      methodOverride = require('method-override'),
+      router = require('./controllers');
 
 // set up express app
 // =============================================================
@@ -25,7 +26,7 @@ app
     .use(express.static(__dirname + '/public'))
     .engine('handlebars', exphbs({ defaultLayout: 'main' }))
     .set('view engine', 'handlebars')
-    .use(require('./controllers'));
+    .use('/', router);
 
 // configure mongoose and start the server
 // =============================================================

@@ -1,11 +1,12 @@
 'use strict';
-const express  = require('express'),
-      router   = express.Router(),
-      request  = require('request'),
+const express = require('express'),
+      router = express.Router(),
+      request = require('request'),
       cheerio = require('cheerio'),
-      Article  = require('../../models/article');
+      Article = require('../../models/article');
+     
 
-      // get all articles from db
+// get all articles from database
 router.get('/', function(req, res) {
     Article
         .find({})
@@ -19,8 +20,8 @@ router.get('/', function(req, res) {
         });
 });
 
-    // get all saved articles
-router.get('/saved', function(req ,res) {
+// get all saved articles
+router.get('/saved', function(req, res) {
     Article
         .find({})
         .where('saved').equals(true)
@@ -36,7 +37,7 @@ router.get('/saved', function(req ,res) {
         });
 });
 
-    // get all deleted articles
+// get all deleted articles
 router.get('/deleted', function(req, res) {
     Article
         .find({})
@@ -51,27 +52,42 @@ router.get('/deleted', function(req, res) {
         });
 });
 
-    // save an article
+// save an article
 router.post('/save/:id', function(req, res) {
     Article.findByIdAndUpdate(req.params.id, {
         $set: { saved: true}
-    },
-    { new: true },
-    function(error, doc) {
-        if (error) {
-            console.log(error);
-            res.status(500);
-        } else {
-            res.redirect('/');
-        }
-    });
+        },
+        { new: true },
+        function(error, doc) {
+            if (error) {
+                console.log(error);
+                res.status(500);
+            } else {
+                res.redirect('/');
+            }
+        });
 });
 
-    // 'dismiss' a scraped article
+// dismiss a scraped article
+router.delete('/dismiss/:id', function(req, res) {
+    Article.findByIdAndUpdate(req.params.id,
+        { $set: { deleted: true } },
+        { new: true },
+        function(error, doc) {
+            if (error) {
+                console.log(error);
+                res.status(500);
+            } else {
+                res.redirect('/');
+            }
+        });
+});
+
+// delete a saved article
 router.delete('/:id', function(req, res) {
     Article.findByIdAndUpdate(req.params.id,
-        { $set: {deleted: true} },
-        { new: true},
+        { $set: { deleted: true} },
+        { new: true },
         function(error, doc) {
             if (error) {
                 console.log(error);
@@ -79,36 +95,38 @@ router.delete('/:id', function(req, res) {
             } else {
                 res.redirect('/saved');
             }
-        });
+        }
+    );
 });
 
-    // scrapé la articles
+// scrape articles
 router.get('/scrape', function(req, res, next) {
-    request('https://www.duffelblog.com/marine-corps/', function(error, response, html) {
+    request('https://news.ycombinator.com', function(error, response, html) {
         let $ = cheerio.load(html);
         let results = [];
-        $('h2').each(function(i, e) {
-            let title = $(this).children('p').text(),
+        $('tr.athing td.title').each(function(i, e) {
+            let title = $(this).children('a').text(),
                 link = $(this).children('a').attr('href'),
                 single = {};
-        if(link !== undefined && link.includes('http') && title !== '') {
-            single = {
-                title: title,
-                link: link
-            };
-            // create new 'article'
-            let entry = new Article(single);
-            //save to db
-            entry.save(function(err, doc) {
-                if (err) {
-                    if (!err.errors.link) {
-                        console.log(err);
+            if (link !== undefined && link.includes('http') &&  title !== '') {
+                single = {
+                    title: title,
+                    link: link
+                };
+                // create new article
+                let entry = new Article(single);
+                // save to database
+                entry.save(function(err, doc) {
+                    if (err) {
+                        if (!err.errors.link) {
+                            console.log(err);
+                        }
+                    } else {
+                        console.log('new article added');
+                        
                     }
-                } else {
-                    console.log('new article saved to db');
-                }
-            });
-          }        
+                });
+            }
         });
         next();
     });

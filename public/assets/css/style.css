@@ -6,7 +6,7 @@ h3 {
 }
 body {
     padding: 70px;
-    background-image: linear-gradient(#fdfcfb, #e2d1c3);
+    background-image: url('https://media.giphy.com/media/3o6ZthWzyoIzSknltu/giphy.gif');
 }
 
 #navbar {
@@ -22,7 +22,7 @@ body {
 
 .jumbotron {
     margin: 20px;
-    background-color:#e2d1c3;
+    background-color:#fdfcfb;
     border-style: solid;
     border-width: 1.5px;
     border-color: #3A3A38;
@@ -42,7 +42,7 @@ body {
 }
 
 .well {
-    background-color: #e4dcf1;
+    background-color: #fdfcfb;
     border-color:#3A3A38;
 }
 

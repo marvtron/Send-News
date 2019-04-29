@@ -1,13 +1,13 @@
-    'use strict';
+'use strict';
 
 
 // dependencies
-//==============================//
+// =============================================================
 const express = require('express'),
-      router  = express.Router(),
+      router = express.Router(),
       Article = require('../models/article');
 
-      // root route
+// root route
 router.get('/', function(req, res) {
     Article
         .find({})
@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
                 console.log(articles);
                 let hbsObj = {
                     title: 'All the News That\'s Fit to Scrape',
-                    subtitle: 'A Special "Duffle Blog" Edition',
+                    subtitle: 'Hacker News Edition',
                     articles: articles
                 };
                 res.render('index', hbsObj);
@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
         });
 });
 
-    // saved articles
+// saved articles
 router.get('/saved', function(req, res) {
     Article
         .find({})
@@ -47,15 +47,15 @@ router.get('/saved', function(req, res) {
                 console.log(articles);
                 let hbsObj = {
                     title: 'All the News That\'s Fit to Scrape',
-                    subtitle: 'Here are your saved articles!',
+                    subtitle: 'Saved Hacker News',
                     articles: articles
                 };
-                res.render('views/partials/navs/saved', hbsObj);
+                res.render("saved" ,hbsObj);
             }
         });
 });
 
-    // require controllers
+// require controllers
 router.use('/api', require('./api'));
 
 module.exports = router;
